@@ -6,7 +6,7 @@ export interface Game {
 
 export interface TwitchItem {
   twitch_id: string;
-  titel: string;
+  title: string;
   url?: string;
   thumbnail_url: string;
   broadcaster_name: string;
