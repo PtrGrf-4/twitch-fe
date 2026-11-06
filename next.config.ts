@@ -19,12 +19,15 @@ const PROXIED_ENDPOINTS = [
 const nextConfig: NextConfig = {
   // Define production-grade asynchronous URL rewriting gateways [1]
   async rewrites() {
-    return PROXIED_ENDPOINTS.map((endpoint) => ({
-      // 1. Match exactly the local relative endpoint used inside our project code
-      source: `/${endpoint}`,
-      // 2. Silently proxy and forward traffic directly to the active live production cloud server
-      destination: `${BACKEND_ORIGIN}/${endpoint}`,
-    }));
+    return [
+      {
+        // 1. Match any local relative endpoint format inside our project code
+        source: "/:path*",
+        // 2. Silently proxy and forward traffic directly to the active live production cloud server
+        destination:
+          "https://tw-a0e97a20c74340f381de66828e634103.ecs.us-west-2.on.aws/:path*",
+      },
+    ];
   },
 };
 
